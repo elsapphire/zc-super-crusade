@@ -37,11 +37,11 @@ def upload_file():
     if request.method == 'POST':
         uploaded_img = request.files['user_picture']
         img_filename = secure_filename(uploaded_img.filename)
-        uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
-        session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
+        # uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
+        # session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
         global num_of_flyers
         num_of_flyers += 1
-        return render_template('submit.html', pic_filename=img_filename,
+        return render_template('submit.html', pic_filename=request.files['user_picture'],
                                num_of_flyers=num_of_flyers)
     else:
         return redirect(url_for('home2'))
