@@ -34,6 +34,8 @@ def home2():
 
 @app.route('/download', methods=['POST', 'GET'])
 def upload_file():
+    date = datetime.datetime.now()
+    real_date = date.strftime('%a, %d %b %Y')
     if request.method == 'POST':
         uploaded_img = request.files['user_picture']
         print(uploaded_img)
@@ -42,7 +44,7 @@ def upload_file():
         session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
         global num_of_flyers
         num_of_flyers += 1
-        return render_template('submit.html', pic_filename=img_filename,
+        return render_template('submit.html', pic_filename=img_filename, date=real_date,
                                num_of_flyers=num_of_flyers)
     else:
         return redirect(url_for('home2'))
