@@ -11,8 +11,8 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 1 * 2048 * 2048
-app.secret_key = os.getenv('CSRF-KEY')
-    # 'SUCCESSabalaka2002@'
+app.secret_key = 'SUCCESSabalaka2002@'
+# 'SUCCESSabalaka2002@'
 
 # main_image = Image.open('static/ce_accra.jpg')
 # width, height = main_image.size

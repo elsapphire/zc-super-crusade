@@ -14,8 +14,8 @@
 
 runtime: python39
 
-env_variables:
-  CSRF-KEY: 'SUCCESSabalaka2002@'
+#env_variables:
+#  CSRF-KEY: 'SUCCESSabalaka2002@'
 
 entrypoint: gunicorn -b :$PORT main:app
 
