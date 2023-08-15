@@ -10,8 +10,8 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 1 * 2048 * 2048
-app.secret_key = 'SUCCESSabalaka2002@'
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+app.secret_key = os.getenv('CSRF-KEY')
 # 'SUCCESSabalaka2002@'
 
 # main_image = Image.open('static/ce_accra.jpg')
@@ -36,12 +36,13 @@ def home2():
 def upload_file():
     if request.method == 'POST':
         uploaded_img = request.files['user_picture']
+        print(uploaded_img)
         img_filename = secure_filename(uploaded_img.filename)
-        # uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
-        # session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
+        uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
+        session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
         global num_of_flyers
         num_of_flyers += 1
-        return render_template('submit.html', pic_filename=request.files['user_picture'],
+        return render_template('submit.html', pic_filename=img_filename,
                                num_of_flyers=num_of_flyers)
     else:
         return redirect(url_for('home2'))
